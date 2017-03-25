@@ -75,6 +75,18 @@ class paraTodos
      * @param type      Tipo de mensaje (Clase CSS a usar)
      * @return text
      */
+    public static function notifica($msg, $type){
+        echo "<script>
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.$type('$msg');
+
+            }, 0);</script>";
+    }
     public static function showMsg($msg, $type)
     {
         if ($msg<>'') {

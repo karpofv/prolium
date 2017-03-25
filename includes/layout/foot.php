@@ -42,7 +42,6 @@
     <!-- Toastr -->
     <script src="<?php echo $ruta_base;?>assets/js/plugins/toastr/toastr.min.js"></script>
     <script src="<?php echo $ruta_base;?>assets/js/plugins/dataTables/datatables.min.js"></script>
-
 <script>
 	function cerrar(){
 		$("#alerta-msg").fadeOut(1000);

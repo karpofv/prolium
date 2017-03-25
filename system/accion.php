@@ -122,6 +122,3 @@
     }
 
     ?>
-  <script type="text/javascript">
-    var cargando = '<center><img style="margin-top: 5px;height:80px;width:80px;" src="<?php echo $ruta_base;?>assets/img/ajax-loader.gif" border="0"></center>';
-  </script>

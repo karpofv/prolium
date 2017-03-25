@@ -1,0 +1,107 @@
+{
+  "name": "storelocator",
+  "version": "1.0.45",
+  "license": "CC-BY-3.0",
+  "description": "serves a google maps store locator",
+  "homepage": "http://torben.website/storeLocator",
+  "documentationWebsite": {
+    "languages": [
+      "deDE",
+      "enUS"
+    ],
+    "name": "storeLocator",
+    "tagline": "Serves a google maps store locator<!--deDE:Bietet einen Google-Maps-Storelocator-->",
+    "trackingCode": "UA-40192634-10"
+  },
+  "keywords": [
+    "storeLocator",
+    "store",
+    "locator",
+    "map",
+    "location",
+    "finder"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "main": "index.compiled.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thaibault/storeLocator"
+  },
+  "scripts": {
+    "build": "webOptimizer build",
+    "buildDLL": "webOptimizer buildDLL",
+    "clear": "webOptimizer clear",
+    "document": "webOptimizer document",
+    "export": "webOptimizer build '{development:{tool:false},module:{preprocessor:{javaScript:{options:{plugins:{__remove__:\"transform-runtime\"}}}}}}'",
+    "exportCompatible": "webOptimizer build '{development:{tool:false},module:{preprocessor:{javaScript:{options:{plugins:{__remove__:\"transform-runtime\",__append__:\"transform-proto-to-assign\"},presets:[\"env\",\"stage-0\"]}}}}}'",
+    "lint": "webOptimizer typeCheck && webOptimizer lint",
+    "prepublish": "npm run build",
+    "serve": "webOptimizer serve",
+    "start": "npm run serve",
+    "test": "webOptimizer test",
+    "testInBrowser": "webOptimizer testInBrowser",
+    "update": "npm version patch && npm publish",
+    "updateDocumentation": "documentationWebsite --log-level info",
+    "watch": "webOptimizer build --watch",
+    "watchDLL": "webOptimizer buildDLL --watch"
+  },
+  "dependencies": {
+    "clientnode": "latest",
+    "jquery": "latest",
+    "js-marker-clusterer": "latest"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-proto-to-assign": "latest",
+    "babel-preset-env": "latest",
+    "documentation-website": "latest",
+    "canvas": "latest",
+    "source-map-support": "latest",
+    "weboptimizer": "latest"
+  },
+  "webOptimizer": {
+    "injection": {
+      "external": {
+        "aliases": {
+          "googleMarkerClusterer": "MarkerClusterer"
+        },
+        "implicit": {
+          "pattern": {
+            "exclude": {
+              "__append__": {
+                "__evaluate__": "/^clientnode\\/test(?:\\.compiled)?(?:\\.js)?$/"
+              }
+            }
+          }
+        }
+      },
+      "internal": {
+        "vendor": {
+          "__evaluate__": "self.debug && 2 < self.givenCommandLineArguments.length && ['buildDLL', 'serve', 'testInBrowser', 'watchDLL'].includes(self.givenCommandLineArguments[2]) ? ['babel-polyfill', 'clientnode', 'exports?Class=MarkerClusterer,google=google!imports?google=>{}!googleMarkerClusterer'].concat(self.givenCommandLineArguments[2] === 'serve' ? [] : ['script!qunitjs', 'weboptimizer/browserAPI']) : []"
+        }
+      }
+    },
+    "module": {
+      "aliases": {
+        "clientnode/test$": "clientnode/test.compiled",
+        "googleMarkerClusterer$": "js-marker-clusterer"
+      },
+      "optimizer": {
+        "babili": null
+      },
+      "preprocessor": {
+        "javaScript": {
+          "options": {
+            "presets": {
+              "__evaluate__": "(self.targetTechnology === 'node' ? ['es2017-node7'] : [['modern-browsers', {loose: true}], 'es2017']).concat('stage-0')"
+            }
+          }
+        }
+      },
+      "skipParseRegularExpressions": {
+        "__evaluate__": "/\\/(?:(?:jquery\\/dist\\/jquery)|(?:webpack\\/buildin\\/global)|(?:webpack\\/buildin\\/module))(?:\\.min)?\\.js(?:\\?.+|$)/"
+      }
+    }
+  }
+}
