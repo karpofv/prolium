@@ -25,7 +25,7 @@ if ($opcion == '2') {
 if ($opcion == '3') {
     $inserte = paraTodos::arrayInserte("zond_zoncodigo, zond_est_codigo", "zona_estado", "$_POST[zona],$_POST[estado] ");
     if($inserte){
-        paraTodos::notifica("Estado asigando exitosamente", "success");
+        paraTodos::notifica("Estado asignado exitosamente", "success");
     }
     combos::CombosSelect("1", "0", "est_codigo, est_descripcion", "tools_estados e", "est_codigo", "est_descripcion", " e.est_codigo not in (select zond_est_codigo from zona_estado ze)");
 }
